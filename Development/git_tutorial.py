@@ -1,5 +1,8 @@
+# check origin repositories
+git remote -v
+
 # change user name  email locally 
-git config --local user.name "vector@test.com"
+git config --local user.email "vector@test.com"
 
 # change user user name locally 
 git config --local user.name "Vector"
