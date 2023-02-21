@@ -1,3 +1,8 @@
+# git revert a directory only
+git checkout <refspec> -- path/to/directory  # or path/to/file
+#where <refspec> can, for instance, be HEAD, that is, the current working commit. Note that this usage of the checkout command will affect the working tree but not the index.
+#git revert is used to "revert a commit", and by this, it should not be understood that the commit disappears from the tree (it would play havoc with history -- if you want that, look at git rebase -i). A reverted commit consists of applying, in reverse, all changes from the commit given as an argument to the tree and create a new commit with the changes (with a default commit message, which you can modify).
+
 # check origin repositories
 git remote -v
 
