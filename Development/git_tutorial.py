@@ -1,3 +1,15 @@
+#show commits with dates
+git log --pretty="%ad%x09%h%x09%s"
+#In case you were curious what the different options were:
+#%h = abbreviated commit hash
+#%x09 = tab (character for code 9)
+#%an = author name
+#%ad = author date (format respects --date= option)
+#%s = subject
+
+#create new branch after switching to a commit
+git switch [<options>] (-c|-C) <new-branch> [<start-point>]
+
 # git revert a directory only
 git checkout <refspec> -- path/to/directory  # or path/to/file
 #where <refspec> can, for instance, be HEAD, that is, the current working commit. Note that this usage of the checkout command will affect the working tree but not the index.
@@ -19,7 +31,7 @@ git config user.name
 git graph
 
 # git set alias
-git config --global alias.graph "git log --graph --oneline --all"
+git config --global alias.graph "log --graph --oneline --all"
 
 # show git log in one line
 git log --graph --oneline --all
