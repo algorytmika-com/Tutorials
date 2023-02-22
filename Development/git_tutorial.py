@@ -1,11 +1,11 @@
-#show commits with dates
+# show commits with dates
 git log --pretty="%ad%x09%h%x09%s"
-#In case you were curious what the different options were:
-#%h = abbreviated commit hash
-#%x09 = tab (character for code 9)
-#%an = author name
-#%ad = author date (format respects --date= option)
-#%s = subject
+# In case you were curious what the different options were:
+# %h = abbreviated commit hash
+# %x09 = tab (character for code 9)
+# %an = author name
+# %ad = author date (format respects --date= option)
+# %s = subject
 
 #create new branch after switching to a commit
 git switch [<options>] (-c|-C) <new-branch> [<start-point>]
