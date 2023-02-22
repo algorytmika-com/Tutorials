@@ -1,3 +1,11 @@
+# go back to a commit
+# This will destroy any local modifications.
+# Don't do it if you have uncommitted work you want to keep.
+git reset --hard 0d1d7fc32
+
+# rename branch
+git branch -m "new_name"
+
 # show commits with dates
 git log --pretty="%ad%x09%h%x09%s"
 # In case you were curious what the different options were:
