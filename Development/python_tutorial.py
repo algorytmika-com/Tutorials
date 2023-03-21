@@ -1,3 +1,58 @@
+##################################################################
+							WEBSCRAPING
+##################################################################
+
+import pandas as pd
+import requests
+from bs4 import BeautifulSoup
+
+url = https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBMDeveloperSkillsNetwork-PY0220EN-SkillsNetwork/labs/project/netflix_data_webpage.html"
+
+data  = requests.get(url).text
+
+#parse the text into html using `beautiful_soup`
+soup = BeautifulSoup(data, 'html5lib')
+
+#turn the html table into a pandas dataframe
+netflix_data = pd.DataFrame(columns=["Date", "Open", "High", "Low", "Close", "Volume"])
+
+# First we isolate the body of the table which contains all the information
+# Then we loop through each row and find all the column values for each row
+for row in soup.find("tbody").find_all('tr'):
+    col = row.find_all("td")
+    date = col[0].text
+    Open = col[1].text
+    high = col[2].text
+    low = col[3].text
+    close = col[4].text
+    adj_close = col[5].text
+    volume = col[6].text
+    
+    # Finally we append the data of each row to the table
+    netflix_data = netflix_data.append({"Date":date, "Open":Open, "High":high, "Low":low, "Close":close, "Adj Close":adj_close, "Volume":volume}, ignore_index=True)  
+	
+# We can now print out the dataframe
+netflix_data.head()
+
+# use the pandas `read_html` function using the url
+read_html_pandas_data = pd.read_html(url)
+
+# Or we can convert the BeautifulSoup object to a string
+read_html_pandas_data = pd.read_html(str(soup))
+
+# Beacause there is only one table on the page, we just take the first table in the list returned
+netflix_dataframe = read_html_pandas_data[0]
+
+netflix_dataframe.head()
+
+# find title attribute
+title = soup.find('title')
+
+##################################################################
+							PYSCAFFOLD
+##################################################################
+
+
 # PyScaffold is a project generator
 pip install pyscaffold
 
@@ -9,9 +64,7 @@ putup analysis --no-skeleton
 python -m pip install -e .
 
 ##################################################################
-##################################################################
-PANDAS START
-##################################################################
+							PANDAS
 ##################################################################
 
 # Access the column using the name
@@ -34,9 +87,23 @@ df_new.loc['a':'d', 'Artist']
 df.loc[df['Date'] == 'Jan 01, 2016', 'Open']
 
 ##################################################################
+							IPYTHON
 ##################################################################
-PANDAS END
+#install
+pip install ipython
+
+#run ipython
+ipython
+
+# run file in iptyhon
+run test_script.py
+
+# run IPython Windows (watch capital letters!)
+python -m IPython
+
+
 ##################################################################
+							GENERAL
 ##################################################################
 
 # uninstalls all pip installed modules at once without "are you sure"):
