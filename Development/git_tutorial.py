@@ -1,3 +1,6 @@
+# clone github repository
+git clone https://github.com/UWPCE-PY310-SP-2022/automated-interviewer-assignment-2-piotreks-uw-edu.git
+
 # go back to a commit
 # This will destroy any local modifications.
 # Don't do it if you have uncommitted work you want to keep.
