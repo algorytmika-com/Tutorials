@@ -1,3 +1,6 @@
+# 
+git config --global core.excludesfile ~/.gitignore_global
+
 # clone github repository
 git clone https://github.com/UWPCE-PY310-SP-2022/automated-interviewer-assignment-2-piotreks-uw-edu.git
 

@@ -134,7 +134,18 @@ python -m IPython
 
 
 ##################################################################
-							GENERAL
+							GENERAL MAC
+##################################################################
+# create virtual enviromen
+python3 -m venv venv
+
+# activate virtual enviroment
+source venv/bin/activate
+
+
+
+##################################################################
+							GENERAL WINDOWS
 ##################################################################
 
 # uninstalls all pip installed modules at once without "are you sure"):
