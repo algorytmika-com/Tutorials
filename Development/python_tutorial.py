@@ -17,10 +17,14 @@ apple_info
 
 apple_info['country']
 
+#  Using the ticker object and the function `history` extract stock information and save it in a dataframe . 
+# Set the `period` parameter to `max` so we get information for the maximum amount of time.
 apple_share_price_data = apple.history(period="max")
 
+#  display the first five rows of the  dataframe using the `head` function. 
 apple_share_price_data.head()
 
+# **Reset the index** using the `reset_index(inplace=True)` function
 apple_share_price_data.reset_index(inplace=True)
 
 apple_share_price_data.plot(x="Date", y="Open")
@@ -37,7 +41,7 @@ import pandas as pd
 import requests
 from bs4 import BeautifulSoup
 
-url = https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBMDeveloperSkillsNetwork-PY0220EN-SkillsNetwork/labs/project/netflix_data_webpage.html"
+url = "https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBMDeveloperSkillsNetwork-PY0220EN-SkillsNetwork/labs/project/netflix_data_webpage.html"
 
 data  = requests.get(url).text
 
@@ -65,6 +69,9 @@ for row in soup.find("tbody").find_all('tr'):
 # We can now print out the dataframe
 netflix_data.head()
 
+# print last 5 rows
+netflix_data.tail()
+
 # use the pandas `read_html` function using the url
 read_html_pandas_data = pd.read_html(url)
 
@@ -78,6 +85,39 @@ netflix_dataframe.head()
 
 # find title attribute
 title = soup.find('title')
+
+#
+
+import yfinance as yf
+import pandas as pd
+import requests
+from bs4 import BeautifulSoup
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
+
+def make_graph(stock_data, revenue_data, stock):
+    fig = make_subplots(rows=2, cols=1, shared_xaxes=True, subplot_titles=("Historical Share Price", "Historical Revenue"), vertical_spacing = .3)
+    stock_data_specific = stock_data[stock_data.Date <= '2021--06-14']
+    revenue_data_specific = revenue_data[revenue_data.Date <= '2021-04-30']
+    fig.add_trace(go.Scatter(x=pd.to_datetime(stock_data_specific.Date, infer_datetime_format=True), y=stock_data_specific.Close.astype("float"), name="Share Price"), row=1, col=1)
+    fig.add_trace(go.Scatter(x=pd.to_datetime(revenue_data_specific.Date, infer_datetime_format=True), y=revenue_data_specific.Revenue.astype("float"), name="Revenue"), row=2, col=1)
+    fig.update_xaxes(title_text="Date", row=1, col=1)
+    fig.update_xaxes(title_text="Date", row=2, col=1)
+    fig.update_yaxes(title_text="Price ($US)", row=1, col=1)
+    fig.update_yaxes(title_text="Revenue ($US Millions)", row=2, col=1)
+    fig.update_layout(showlegend=False,
+    height=900,
+    title=stock,
+    xaxis_rangeslider_visible=True)
+    fig.show()
+	
+
+# remove comma and dollar sign
+tesla_revenue["Revenue"] = tesla_revenue['Revenue'].str.replace(',|\$',"")
+	
+# remove null and empty strings
+tesla_revenue.dropna(inplace=True)
+tesla_revenue = tesla_revenue[tesla_revenue['Revenue'] != ""]
 
 ##################################################################
 							PYSCAFFOLD
@@ -134,6 +174,23 @@ python -m IPython
 
 
 ##################################################################
+							PYTEST
+##################################################################
+# when proble running pytest
+py -m pip install pytest-cov
+
+#pytest - set enviroment ot recogniize modules, put inside test file
+# https://stackoverflow.com/questions/10253826/path-issue-with-pytest-importerror-no-module-named-yadayadayada
+# add to contest.py
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)) + '\\..\\src\\assignment06')
+
+# run pytest at level above scr and tests
+python -m pytest
+
+# run pytest without warning concerning the report
+python -m pytest --cov
+
+##################################################################
 							GENERAL
 ##################################################################
 
@@ -142,8 +199,6 @@ python -m pip freeze > req.del
 python -m pip uninstall -y -r req.del
 del req.del
 
-# run pytest at level above scr and tests
-python -m pytest
 
 #create virtual enviroment
 py -m venv venv
