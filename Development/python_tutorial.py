@@ -200,13 +200,6 @@ python -m pip freeze > req.del
 python -m pip uninstall -y -r req.del
 del req.del
 
-
-#create virtual enviroment
-py -m venv venv
-
-# activate virtual enviroment
- .\venv\Scripts\activate
-
 # Generate libraries from current projects virtual enviroment
 py -m pip freeze > requirements.txt
 
