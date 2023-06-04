@@ -1,3 +1,9 @@
+# run the unit tests in the test module and collects code coverage
+coverage run -m unittest test
+
+# generate a code coverage report, showing lines not covered
+coverage report -m
+
 # install coverage
 pip install coverage
 
@@ -7,14 +13,9 @@ python -m coverage run test.py
 # generate a code coverage report
 python -m coverage report
 
-# generate a code coverage report, showing lines not covered
-coverage report -m
 
 # run the test_mock.py unittest file under coverage analysis, collecting data only for mock_tutorial.py.
 python -m coverage run --include=mock_tutorial.py -m unittest test_mock.py
-
-# run the unit tests in the test module and collects code coverage
-coverage run -m unittest test
 
 # run only on some unittest
 coverage run -m unittest test.AdderTests testSubstractTests test.CalculatorTests
